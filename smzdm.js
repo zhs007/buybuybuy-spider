@@ -4,6 +4,7 @@
 
 var cheerio = require("cheerio");
 var request = require('request');
+var jsdom = require('jsdom');
 
 var options = {
     url: 'http://haitao.smzdm.com/',
@@ -23,8 +24,41 @@ var options = {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
 //         console.log(body);
-        output(body);
-    }
+
+
+jsdom.env(body,['http://code.jquery.com/jquery.js'],function(errors, window){  
+	
+	var str = "";
+	window.$("[class='list list_preferential']").each(function(){
+// 		console.log("contents:", window.$(this).html());
+		
+		var list = window.$(this);
+		var timesort = list.attr("timesort");
+		console.log("timesort:", timesort);
+		str += "timesort:" + timesort + "\n";
+
+		
+		var itemName = list.find("[class='itemName']").children().html();		
+		console.log("itemName:", itemName);
+		str += "itemName:" + itemName + "\n";
+				
+		var lrInfo = list.find("[class='lrInfo']").children().html();
+		console.log("lrInfo:", lrInfo);		
+		str += "lrInfo:" + lrInfo + "\n";
+				
+		var link = list.find("[class='lrInfo']").children().find("a").attr("href");
+		console.log("link:", link);		
+		str += "link:" + link + "\n";
+				
+		str += "\n";
+	});
+	
+	
+
+        output(str);
+
+});
+}
 }
 
 request(options, callback);
@@ -32,7 +66,7 @@ request(options, callback);
 function output(doc){
 var fs = require('fs');
 //新建 hello.txt ,并往文件中写入 Hello World!
-fs.open('doc.txt', 'w', 0666, function(e, fd) {
+fs.open('doc1.txt', 'w', 0666, function(e, fd) {
     if(e) {
         console.log('错误信息：' + e);
     } else {    
@@ -46,6 +80,7 @@ fs.open('doc.txt', 'w', 0666, function(e, fd) {
     }
 });
 }
+
 
 
 //var url = "http://haitao.smzdm.com/"

@@ -6,7 +6,8 @@
   "dependencies": {
     "request": "*",
     "cheerio": "*",
-    "fs": "*"
+    "fs": "*",
+    "jsdom": "3.*"
   },
   "scripts": {
     "start": "node ./bin/heysdkrounter.js"
