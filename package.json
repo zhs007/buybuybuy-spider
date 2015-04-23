@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "request": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "fs": "*"
   },
   "scripts": {
     "start": "node ./bin/heysdkrounter.js"

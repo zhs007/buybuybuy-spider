@@ -22,11 +22,31 @@ var options = {
 
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
-        console.log(body);
+//         console.log(body);
+        output(body);
     }
 }
 
 request(options, callback);
+
+function output(doc){
+var fs = require('fs');
+//新建 hello.txt ,并往文件中写入 Hello World!
+fs.open('doc.txt', 'w', 0666, function(e, fd) {
+    if(e) {
+        console.log('错误信息：' + e);
+    } else {    
+        fs.write(fd, doc, 0, 'utf8', function(e) {
+            if(e) {
+                console.log('出错信息：' + e);
+            } else {
+                fs.closeSync(fd);
+            }
+        });
+    }
+});
+}
+
 
 //var url = "http://haitao.smzdm.com/"
 //
