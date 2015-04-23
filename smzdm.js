@@ -24,6 +24,7 @@ var options = {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
 //         console.log(body);
+output(body, "doc.txt");
 
 
 jsdom.env(body,['http://code.jquery.com/jquery.js'],function(errors, window){  
@@ -45,8 +46,12 @@ jsdom.env(body,['http://code.jquery.com/jquery.js'],function(errors, window){
 		var lrInfo = list.find("[class='lrInfo']").children().html();
 		console.log("lrInfo:", lrInfo);		
 		str += "lrInfo:" + lrInfo + "\n";
+		
+		var img = list.find("img").attr("src");
+		console.log("img:", img);
+		str += "img:" + img + "\n";
 				
-		var link = list.find("[class='lrInfo']").children().find("a").attr("href");
+		var link = list.find("[class='itemName']").find("a").attr("href");
 		console.log("link:", link);		
 		str += "link:" + link + "\n";
 				
@@ -55,7 +60,7 @@ jsdom.env(body,['http://code.jquery.com/jquery.js'],function(errors, window){
 	
 	
 
-        output(str);
+        output(str, "doc1.txt");
 
 });
 }
@@ -63,10 +68,10 @@ jsdom.env(body,['http://code.jquery.com/jquery.js'],function(errors, window){
 
 request(options, callback);
 
-function output(doc){
+function output(doc, name){
 var fs = require('fs');
 //新建 hello.txt ,并往文件中写入 Hello World!
-fs.open('doc1.txt', 'w', 0666, function(e, fd) {
+fs.open(name, 'w', 0666, function(e, fd) {
     if(e) {
         console.log('错误信息：' + e);
     } else {    
