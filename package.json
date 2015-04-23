@@ -1,0 +1,15 @@
+{
+  "name": "buyspider",
+  "version": "1.0.0",
+  "description": "buy spider",
+  "main": "index.js",
+  "dependencies": {
+    "request": "*",
+    "cheerio": "*"
+  },
+  "scripts": {
+    "start": "node ./bin/heysdkrounter.js"
+  },
+  "author": "zhs007",
+  "license": "MIT"
+}
