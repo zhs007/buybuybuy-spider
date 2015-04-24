@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 var request = require('request');
 var jsdom = require('jsdom');
 
-readHead("header.json");
+readHead("header_smzdm.json");
 
 function readHead(head){
 	var fs = require('fs');
