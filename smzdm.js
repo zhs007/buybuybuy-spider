@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 var request = require('request');
 var jsdom = require('jsdom');
 
-readHead("cookie.txt");
+readHead("cookie.json");
 
 function readHead(head){
 	var fs = require('fs');
@@ -14,18 +14,19 @@ function readHead(head){
 		if (err) {  
 			console.error(err);  
 		} else {   	
+			var json = JSON.parse(data);
 	
 			var options = {
-			    url: 'http://faxian.smzdm.com/json_more?timesort=142979851721',
+			    url: json.url,
 			    headers: {
-        			'Host': 'faxian.smzdm.com',
+        			'Host': json.host,
 			        'Connection': 'keep-alive',
 			        'Accept': 'application/json, text/javascript, */*; q=0.01',
 			        'X-Requested-With': 'XMLHttpRequest',
 			        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36',
-			        'Referer': 'http://faxian.smzdm.com/',
+			        'Referer': json.referer,
 			        'Accept-Language': 'zh,en-US;q=0.8,en;q=0.6',
-			        'Cookie': data
+			        'Cookie': json.cookie
 		        }
    
 			};
