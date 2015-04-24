@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 var request = require('request');
 var jsdom = require('jsdom');
 
-readHead("cookie.json");
+readHead("header.json");
 
 function readHead(head){
 	var fs = require('fs');
@@ -41,21 +41,20 @@ function callback(error, response, body) {
 console.log(response.statusCode);
     if (!error && response.statusCode == 200) {
 //         console.log(body);
-		output(body, "doc.json");
+// 		output(body, "doc.json");
 
 // 		saveFromHtml(body);
 
-		saveFromJson(body);
+		var str = saveFromJson(body);
 
+   		output(str, "json.txt");
 	}
 }
 
 //解析json
 function saveFromJson(body){
 	var json = JSON.parse(body);
-	
-	console.log(json.length);
-	
+		
 	var str = "";
 	for(var i = 0; i < json.length; ++i)
 	{
@@ -127,7 +126,7 @@ function saveFromJson(body){
 		str += "timesort: " + json[i].timesort + "\n";
 		str += "\n";
 	}
-    output(str, "json.txt");
+    return str;
 }
 
 //解析html
