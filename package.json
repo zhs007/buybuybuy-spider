@@ -7,7 +7,9 @@
     "request": "*",
     "cheerio": "*",
     "fs": "*",
-    "jsdom": "3.*"
+    "jsdom": "3.*",
+    "winston": "*",
+    "mysql": "*"
   },
   "scripts": {
     "start": "node ./bin/heysdkrounter.js"

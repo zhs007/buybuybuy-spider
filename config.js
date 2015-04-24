@@ -11,3 +11,7 @@ exports.mysql_user = 'zhs007';
 exports.mysql_pwd = 'zhs007';
 exports.mysql_name = 'buybuybuy';
 
+// 日志配置
+exports.log_path = '../buybuybuy-spider.log';
+exports.logdev_path = '../buybuybuy-spider-dev.log';
+
