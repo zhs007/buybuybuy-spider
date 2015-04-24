@@ -47,7 +47,7 @@ console.log(response.statusCode);
 
 		var str = saveFromJson(body);
 
-   		output(str, "json.txt");
+   		output(str, "output_smzdm.txt");
 	}
 }
 
