@@ -6,9 +6,9 @@
 exports.datamgr_type = 'mysql';
 
 // mysql配置
-exports.mysql_host = '121.41.86.183';
-exports.mysql_user = 'zhs007';
-exports.mysql_pwd = 'zhs007';
+exports.mysql_host = 'localhost';
+exports.mysql_user = 'root';
+exports.mysql_pwd = 'root';
 exports.mysql_name = 'buybuybuy';
 
 // 日志配置
