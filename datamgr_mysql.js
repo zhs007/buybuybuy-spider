@@ -18,7 +18,7 @@ function insert(lib, obj) {
             val2 += ', ';
         }
 
-        val1 += key;
+        val1 += util.format("`%s`", key);
         val2 += util.format("'%s'", obj[key]);
 
         ++index;

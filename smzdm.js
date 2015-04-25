@@ -142,7 +142,7 @@ function saveFromJson(body){
 		var timesort = json[i].timesort;
 		var pic = json[i].article_pic;
 		var all = str;
-		var DataJson = {"platform":"smzdm", "platform_id":platform_id, "title":title, "content":content, "price":price, "content_all":content_all, "poster":poster, "date":date, "comment":comment, "url":url, "category":category, "timesort":timesort, "pic":pic, "all":all};
+		var DataJson = {"platform":"smzdm", "platform_id":platform_id, "title":encodeURIComponent(title), "content":encodeURIComponent(content), "price":encodeURIComponent(price), "content_all":encodeURIComponent(content_all), "poster":encodeURIComponent(poster), "date":encodeURIComponent(date), "comment":comment, "url":encodeURIComponent(url), "category":encodeURIComponent(category), "timesort":timesort, "pic":encodeURIComponent(pic), "all":encodeURIComponent(all)};
 		
 		recommendmgr.insertRecommend(DataJson);
 	}
