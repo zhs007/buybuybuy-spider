@@ -5,6 +5,7 @@
 var cheerio = require("cheerio");
 var request = require('request');
 var jsdom = require('jsdom');
+var recommendmgr = require('./recommendmgr');
 
 readHead("header_smzdm.json");
 
@@ -125,6 +126,25 @@ function saveFromJson(body){
 		
 		str += "timesort: " + json[i].timesort + "\n";
 		str += "\n";
+		
+		
+		
+		var platform_id = "smzdm_" + json[i].article_id;
+		var title = json[i].article_title;
+		var content = json[i].article_content;
+		var price = json[i].article_price;
+		var content_all = json[i].article_content_all;
+		var poster = json[i].article_referrals;
+		var date = json[i].article_date;
+		var comment = json[i].article_comment;
+		var url = json[i].article_url;
+		var category = json[i].top_category;
+		var timesort = json[i].timesort;
+		var pic = json[i].article_pic;
+		var all = str;
+		var DataJson = {"platform":"smzdm", "platform_id":platform_id, "title":title, "content":content, "price":price, "content_all":content_all, "poster":poster, "date":date, "comment":comment, "url":url, "category":category, "timesort":timesort, "pic":pic, "all":all};
+		
+		recommendmgr.insertRecommend(DataJson);
 	}
     return str;
 }
