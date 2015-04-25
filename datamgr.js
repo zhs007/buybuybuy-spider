@@ -11,7 +11,7 @@ var s_mgr;
 
 function getDataMgr() {
     if (s_mgr == undefined) {
-        if (cfg == 'mysql') {
+        if (cfg.datamgr_type == 'mysql') {
             s_mgr = datamgr_mysql;
         }
     }
