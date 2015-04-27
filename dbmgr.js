@@ -71,8 +71,12 @@ function onDBError(err) {
 }
 
 function query(sql, funcOnQuery) {
-    this.connect(function () {
-        this.dbcon.query(sql, funcOnQuery);
+    var dbc = this;
+
+    dbc.lstQuery.push({sql: sql, func: funcOnQuery, querytype: 'query'});
+
+    dbc.connect(function () {
+        dbc.onProc();
     });
 }
 
@@ -105,6 +109,17 @@ function isValidResult(rows, name) {
     return typeof (rows) != 'undefined' && rows.length > 0 && rows[0].hasOwnProperty(name) && rows[0][name] !== null;
 }
 
+function onProc() {
+    var dbc = this;
+
+    while (dbc.lstQuery.length > 0) {
+        var curQuery = dbc.lstQuery.shift();
+        if (curQuery.querytype == 'query') {
+            dbc.dbcon.query(curQuery.sql, curQuery.func);
+        }
+    }
+}
+
 function DBClient(dbid, host, user, password, database) {
     this.dbid = dbid;
 
@@ -117,6 +132,8 @@ function DBClient(dbid, host, user, password, database) {
 
     this.dbcon = null;
     this.stateConnect = -1;
+
+    this.lstQuery = [];
 }
 
 DBClient.prototype.type = 'DBClient';
@@ -127,6 +144,7 @@ DBClient.prototype.query = query;
 DBClient.prototype._queryList = _queryList;
 DBClient.prototype.queryList = queryList;
 DBClient.prototype.isValidResult = isValidResult;
+DBClient.prototype.onProc = onProc;
 
 var mapDBClient = {};
 
