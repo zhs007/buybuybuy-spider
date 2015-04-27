@@ -59,7 +59,7 @@ function saveFromJson(body){
 	var str = "";
 	for(var i = 0; i < json.length; ++i)
 	{
-		console.log(json[i].article_id);
+// 		console.log(json[i].article_id);
 		str += "article_id: " + json[i].article_id + "\n";
 		str += "article_title: " + json[i].article_title + "\n";
 		str += "article_content: " + json[i].article_content + "\n";
@@ -142,6 +142,20 @@ function saveFromJson(body){
 		var timesort = json[i].timesort;
 		var pic = json[i].article_pic;
 		var all = str;
+		
+		title = replace(title);
+		content = replace(content);
+		price = replace(price);
+		content_all = replace(content_all);
+		poster = replace(poster);
+		date = replace(date);
+		comment = replace(comment);
+		url = replace(url);
+		category = replace(category);
+		timesort = replace(timesort);
+		pic = replace(pic);
+		all = replace(all);
+		
 		var DataJson = {"platform":"smzdm", "platform_id":platform_id, "title":title, "content":content, "price":price, "content_all":content_all, "poster":poster, "date":date, "comment":comment, "url":url, "category":category, "timesort":timesort, "pic":pic, "all":all};
 		
 		recommendmgr.insertRecommend(DataJson);
@@ -158,24 +172,24 @@ function saveFromHtml(body){
 		
 		var list = window.$(this);
 		var timesort = list.attr("timesort");
-		console.log("timesort:", timesort);
+// 		console.log("timesort:", timesort);
 		str += "timesort:" + timesort + "\n";
 
 		
 		var itemName = list.find("[class='itemName']").children().html();		
-		console.log("itemName:", itemName);
+// 		console.log("itemName:", itemName);
 		str += "itemName:" + itemName + "\n";
 				
 		var lrInfo = list.find("[class='lrInfo']").children().html();
-		console.log("lrInfo:", lrInfo);		
+// 		console.log("lrInfo:", lrInfo);		
 		str += "lrInfo:" + lrInfo + "\n";
 		
 		var img = list.find("img").attr("src");
-		console.log("img:", img);
+// 		console.log("img:", img);
 		str += "img:" + img + "\n";
 				
 		var link = list.find("[class='itemName']").find("a").attr("href");
-		console.log("link:", link);		
+// 		console.log("link:", link);		
 		str += "link:" + link + "\n";
 				
 		str += "\n";
@@ -186,6 +200,16 @@ function saveFromHtml(body){
 	});
 }
 
+function replace(str){
+
+	var str1 = "";
+	str1 += str;
+	str1 = str1.replace(/"/g, "“");
+	str1 = str1.replace(/'/g, "‘");
+// 	console.log("str1:" + str1);
+
+	return str1;
+}
 
 function output(doc, name){
 var fs = require('fs');

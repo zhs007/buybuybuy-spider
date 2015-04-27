@@ -25,7 +25,7 @@ function insert(lib, obj) {
     }
 
     var sql = util.format("insert into %s(%s) values(%s)", lib, val1, val2);
-
+// 	console.log("sql:" + sql)
     this.dbclient.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
